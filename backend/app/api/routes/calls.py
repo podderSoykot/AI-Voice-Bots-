@@ -16,11 +16,18 @@ vapi_service = VapiService()
 @router.post("/calls/initiate", response_model=dict, status_code=status.HTTP_201_CREATED)
 async def initiate_call(
     call_data: CallInitiate,
-    assistant_id: Optional[str] = None,
     db: AsyncSession = Depends(get_db)
 ):
     """Initiate an outbound call using Vapi."""
     try:
+        # Check if Vapi API key is configured
+        from app.config import settings
+        if not settings.VAPI_API_KEY or settings.VAPI_API_KEY == "":
+            raise HTTPException(
+                status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+                detail="Vapi API key is not configured. Please set VAPI_API_KEY in your .env file. Get your API key from https://dashboard.vapi.ai"
+            )
+        
         # Get lead information
         lead = await DatabaseService.get_lead(db, call_data.lead_id)
         if not lead:
@@ -32,10 +39,19 @@ async def initiate_call(
         # Use provided phone number or lead's phone
         phone_number = call_data.phone_number or lead.phone
         
+        # Validate that assistant_id is provided
+        if not call_data.assistant_id:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="assistant_id is required to initiate a call"
+            )
+        
         # Initiate call via Vapi
         vapi_response = await vapi_service.initiate_call(
-            phone_number=phone_number,
-            assistant_id=assistant_id,
+            customer_phone=phone_number,
+            assistant_id=call_data.assistant_id,
+            phone_number_id=call_data.phone_number_id,
+            phone_number=None,  # Can be added to schema if needed
             customer={
                 "number": phone_number,
                 "name": lead.name

@@ -1,0 +1,16 @@
+=== LEADS ===
+ID,Name,Email,Phone,Company,Status,Source,Notes,CRM ID,Created At,Updated At
+1,Podder_Soykot,diptopodder95@gmail.com,+8801734537627,Treenetra,new,string,Looking for product demo,1234,2026-03-08T08:24:40.548197+00:00,2026-03-08T08:50:23.340732+00:00
+
+=== CALLS ===
+ID,Call ID (Vapi),Lead ID,Direction,Status,Outcome,Duration (seconds),Transcript,Recording URL,Started At,Ended At,Created At,Updated At
+1,019cccb0-f945-766e-8742-8347b9a56b55,1,outbound,initiated,,,,,,,2026-03-08T09:04:34.472871+00:00,2026-03-08T09:04:34.472871+00:00
+
+=== APPOINTMENTS ===
+ID,Lead ID,Scheduled Time,Status,Calendar Event ID,Notes,Reminder Sent,Created At,Updated At
+1,1,2026-03-08T09:11:33.670000+00:00,scheduled,,test appointment,false,2026-03-08T09:11:59.399724+00:00,2026-03-08T09:11:59.399724+00:00
+
+=== SUMMARY ===
+Total Leads: 1
+Total Calls: 1
+Total Appointments: 1
