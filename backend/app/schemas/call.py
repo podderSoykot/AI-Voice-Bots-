@@ -8,7 +8,10 @@ from app.models.call import CallStatus, CallOutcome
 class CallInitiate(BaseModel):
     """Schema for initiating a call."""
     lead_id: int
-    phone_number: Optional[str] = None  # Override lead's phone if provided
+    phone_number: Optional[str] = None  # Override lead's phone if provided (number to call TO)
+    assistant_id: Optional[str] = None  # Vapi assistant ID
+    phone_number_id: Optional[str] = None  # Vapi phone number ID to call from (UUID)
+    vapi_phone_number: Optional[str] = None  # Vapi phone number to call from (alternative to phone_number_id)
 
 
 class CallCreate(BaseModel):

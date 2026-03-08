@@ -97,9 +97,17 @@ AI-Voice-Bots/
    - Alternative docs: http://localhost:8000/redoc
    - Health check: http://localhost:8000/health
 
-## API Endpoints
+## API Documentation
 
-### Leads
+For complete API documentation, see:
+- **[Full API Documentation](docs/API.md)** - Comprehensive guide with examples
+- **[Quick Reference Guide](docs/API_QUICK_REFERENCE.md)** - Quick lookup for endpoints
+- **Interactive Docs**: http://localhost:8000/docs (Swagger UI)
+- **Alternative Docs**: http://localhost:8000/redoc
+
+### Quick API Overview
+
+**Leads**
 - `POST /api/v1/leads` - Create a new lead
 - `GET /api/v1/leads` - Get all leads (with pagination and filtering)
 - `GET /api/v1/leads/{lead_id}` - Get a specific lead
@@ -108,15 +116,15 @@ AI-Voice-Bots/
 - `POST /api/v1/leads/bulk` - Create multiple leads
 - `POST /api/v1/leads/{lead_id}/sync-crm` - Manually sync lead to CRM
 
-### Calls
-- `POST /api/v1/calls/initiate` - Initiate an outbound call
+**Calls**
+- `POST /api/v1/calls/initiate` - Initiate an outbound call (requires `assistant_id` in body)
 - `GET /api/v1/calls` - Get all calls (with pagination and filtering)
 - `GET /api/v1/calls/{call_id}` - Get a specific call
 - `GET /api/v1/calls/vapi/{vapi_call_id}` - Get call by Vapi ID
 - `PUT /api/v1/calls/{call_id}` - Update a call record
 - `GET /api/v1/calls/lead/{lead_id}` - Get all calls for a lead
 
-### Appointments
+**Appointments**
 - `POST /api/v1/appointments` - Create a new appointment
 - `GET /api/v1/appointments` - Get all appointments
 - `GET /api/v1/appointments/{appointment_id}` - Get a specific appointment
@@ -124,7 +132,7 @@ AI-Voice-Bots/
 - `DELETE /api/v1/appointments/{appointment_id}` - Delete an appointment
 - `GET /api/v1/appointments/lead/{lead_id}` - Get all appointments for a lead
 
-### Webhooks
+**Webhooks**
 - `POST /api/v1/webhooks/vapi` - Handle Vapi webhooks
 - `POST /api/v1/webhooks/crm` - Handle CRM webhooks
 - `POST /api/v1/webhooks/calendar` - Handle calendar webhooks

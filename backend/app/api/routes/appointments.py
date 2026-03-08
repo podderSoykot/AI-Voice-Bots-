@@ -36,7 +36,7 @@ async def create_appointment(
         # Create calendar event if requested
         calendar_event_id = None
         if create_calendar_event and calendar_service.service:
-            calendar_event_id = await calendar_service.create_appointment_event(
+            calendar_event_id = calendar_service.create_appointment_event(
                 appointment=appointment,
                 lead=lead
             )
@@ -138,7 +138,7 @@ async def update_appointment(
         if update_calendar and updated_appointment.calendar_event_id and calendar_service.service:
             lead = await DatabaseService.get_lead(db, updated_appointment.lead_id)
             if lead:
-                await calendar_service.update_event(
+                calendar_service.update_event(
                     event_id=updated_appointment.calendar_event_id,
                     appointment=updated_appointment,
                     lead=lead
@@ -174,7 +174,7 @@ async def delete_appointment(
         
         # Delete calendar event if requested
         if delete_calendar_event and appointment.calendar_event_id and calendar_service.service:
-            await calendar_service.delete_event(appointment.calendar_event_id)
+            calendar_service.delete_event(appointment.calendar_event_id)
         
         # Delete appointment
         success = await DatabaseService.delete_appointment(db, appointment_id)

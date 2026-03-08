@@ -35,7 +35,7 @@ class GoogleCalendarService:
             print(f"Error initializing Google Calendar service: {str(e)}")
             self.service = None
     
-    async def create_event(
+    def create_event(
         self,
         appointment: Appointment,
         lead: Lead,
@@ -107,7 +107,7 @@ Notes: {appointment.notes or 'None'}
             print(f"Error creating calendar event: {str(e)}")
             return None
     
-    async def update_event(
+    def update_event(
         self,
         event_id: str,
         appointment: Appointment,
@@ -150,7 +150,7 @@ Notes: {appointment.notes or 'None'}
             print(f"Error updating calendar event: {str(e)}")
             return None
     
-    async def delete_event(self, event_id: str) -> bool:
+    def delete_event(self, event_id: str) -> bool:
         """Delete a calendar event."""
         if not self.service:
             return False
@@ -165,7 +165,7 @@ Notes: {appointment.notes or 'None'}
             print(f"Error deleting calendar event: {str(e)}")
             return False
     
-    async def get_event(self, event_id: str) -> Optional[Dict[str, Any]]:
+    def get_event(self, event_id: str) -> Optional[Dict[str, Any]]:
         """Get a calendar event by ID."""
         if not self.service:
             return None
@@ -180,7 +180,7 @@ Notes: {appointment.notes or 'None'}
             print(f"Error getting calendar event: {str(e)}")
             return None
     
-    async def list_events(
+    def list_events(
         self,
         time_min: Optional[datetime] = None,
         time_max: Optional[datetime] = None,
@@ -208,13 +208,13 @@ Notes: {appointment.notes or 'None'}
             print(f"Error listing calendar events: {str(e)}")
             return []
     
-    async def create_appointment_event(
+    def create_appointment_event(
         self,
         appointment: Appointment,
         lead: Lead
     ) -> Optional[str]:
         """Create a calendar event for an appointment and return the event ID."""
-        result = await self.create_event(
+        result = self.create_event(
             appointment=appointment,
             lead=lead,
             summary=f"Sales Appointment - {lead.name}",

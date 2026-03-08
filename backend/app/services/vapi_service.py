@@ -84,27 +84,61 @@ class VapiService:
     
     async def initiate_call(
         self,
-        phone_number: str,
+        customer_phone: str,
         assistant_id: Optional[str] = None,
         assistant: Optional[Dict[str, Any]] = None,
+        phone_number_id: Optional[str] = None,
+        phone_number: Optional[str] = None,
         customer: Optional[Dict[str, Any]] = None,
         metadata: Optional[Dict[str, Any]] = None,
         **kwargs
     ) -> Dict[str, Any]:
-        """Initiate an outbound call."""
-        call_data = {
-            "phoneNumberId": phone_number,  # This should be a phone number ID from Vapi
-            **kwargs
-        }
+        """Initiate an outbound call.
         
+        Args:
+            customer_phone: The phone number to call (recipient)
+            assistant_id: Vapi assistant ID to use
+            assistant: Assistant configuration dict (alternative to assistant_id)
+            phone_number_id: Vapi phone number ID to call from (optional)
+            customer: Customer dict with number and name (will be created from customer_phone if not provided)
+            metadata: Additional metadata for the call
+        """
+        call_data = {**kwargs}
+        
+        # Add phone number ID or phone number (the number to call FROM)
+        # Vapi requires either phoneNumberId (UUID) or phoneNumber (string)
+        has_phone_config = False
+        
+        if phone_number_id and phone_number_id != "your-phone-number-id-from-vapi":
+            # Check if it looks like a UUID (basic validation)
+            if len(phone_number_id) > 10 and "-" in phone_number_id:
+                call_data["phoneNumberId"] = phone_number_id
+                has_phone_config = True
+        
+        if not has_phone_config and phone_number:
+            # Use phone number string as alternative
+            call_data["phoneNumber"] = phone_number
+            has_phone_config = True
+        
+        # Note: If neither is provided, Vapi will return an error
+        # This is expected - user must configure a phone number in Vapi
+        
+        # Add assistant configuration
         if assistant_id:
             call_data["assistantId"] = assistant_id
         elif assistant:
             call_data["assistant"] = assistant
         
+        # Add customer information
         if customer:
             call_data["customer"] = customer
+        else:
+            # Create customer dict from phone number
+            call_data["customer"] = {
+                "number": customer_phone
+            }
         
+        # Add metadata
         if metadata:
             call_data["metadata"] = metadata
         
@@ -115,6 +149,24 @@ class VapiService:
                 json=call_data,
                 timeout=30.0
             )
+            if response.status_code == 401:
+                raise ValueError(
+                    "Vapi API authentication failed. Please check your VAPI_API_KEY in .env file. "
+                    "Get your API key from https://dashboard.vapi.ai"
+                )
+            if response.status_code == 400:
+                error_detail = "Bad Request"
+                try:
+                    error_response = response.json()
+                    error_detail = error_response.get("message") or error_response.get("error") or str(error_response)
+                except:
+                    error_detail = response.text[:500] if response.text else "Bad Request"
+                raise ValueError(
+                    f"Vapi API request failed (400 Bad Request): {error_detail}. "
+                    f"Check that you have a phone number configured in Vapi dashboard. "
+                    "You may need to set up a phone number or provide phoneNumberId. "
+                    "See: https://docs.vapi.ai"
+                )
             response.raise_for_status()
             return response.json()
     
