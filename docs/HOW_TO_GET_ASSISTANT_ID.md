@@ -70,7 +70,7 @@ Copy the Assistant ID and use it in your API call:
 {
   "lead_id": 1,
   "assistant_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-  "phone_number": "+8801734537627"
+  "phone_number": "+1234567890"
 }
 ```
 
@@ -113,7 +113,7 @@ Here's what a typical assistant might look like:
 
 ### "The assistant ID looks wrong"
 - Assistant IDs are UUIDs (long strings with hyphens)
-- They look like: `54643856-6b8f-4bf4-806a-0b1fe5ba0f10`
+- They look like: `a1b2c3d4-e5f6-7890-abcd-ef1234567890`
 - If you see just "1" or a short number, that's not the right ID
 
 ## Need Help?
@@ -121,4 +121,5 @@ Here's what a typical assistant might look like:
 - [Vapi Documentation](https://docs.vapi.ai)
 - [Vapi Dashboard](https://dashboard.vapi.ai)
 - Check the Vapi support or community forums
+
 

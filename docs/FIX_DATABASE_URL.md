@@ -14,7 +14,7 @@ DATABASE_URL=postgresql://postgres:postgres@localhost:5432/ai_voice_bots
 
 ```env
 # API Configuration
-SECRET_KEY=d7cdd086-0910-4b78-a0ff-83bbbd58e891
+SECRET_KEY=your-secret-key-here-change-in-production
 DEBUG=False
 API_V1_PREFIX=/api/v1
 
@@ -22,7 +22,7 @@ API_V1_PREFIX=/api/v1
 DATABASE_URL=postgresql://postgres:postgres@localhost:5432/ai_voice_bots
 
 # Vapi Configuration
-VAPI_API_KEY=54643856-6b8f-4bf4-806a-0b1fe5ba0f10
+VAPI_API_KEY=your-vapi-api-key-here
 VAPI_BASE_URL=https://api.vapi.ai
 
 # CORS Configuration
@@ -36,4 +36,5 @@ CORS_ORIGINS=*
 3. **Try your API call again**
 
 The database connection should work now!
+
 
