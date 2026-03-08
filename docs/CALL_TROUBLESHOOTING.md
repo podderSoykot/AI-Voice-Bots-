@@ -6,7 +6,7 @@
 
 The system calls the **lead's phone number**, NOT your phone number.
 
-- **Lead's Phone**: `+8801734537627` (the number being called)
+- **Lead's Phone**: `+1234567890` (the number being called)
 - **Your Phone**: Not called (you're the caller, not the recipient)
 
 ## Check Call Status
@@ -20,7 +20,7 @@ Check the call status using the call ID:
 GET http://127.0.0.1:8000/api/v1/calls/1
 
 # Or by Vapi call ID
-GET http://127.0.0.1:8000/api/v1/calls/vapi/019cccb0-f945-766e-8742-8347b9a56b55
+GET http://127.0.0.1:8000/api/v1/calls/vapi/your-vapi-call-id-here
 ```
 
 ### Method 2: Check Database
@@ -51,7 +51,7 @@ Look for the call status in the CSV output.
 - Wait a few seconds and check again
 
 ### 2. Wrong Phone Number
-- Verify the lead's phone number is correct: `+8801734537627`
+- Verify the lead's phone number is correct: `+1234567890`
 - Make sure it includes country code (+880 for Bangladesh)
 
 ### 3. Call Failed
@@ -90,4 +90,5 @@ To see what happened with your call:
 - Make sure the phone is on and can receive calls
 - Check the timezone - calls might be scheduled for a different time
 - Verify the country code is correct (+880 for Bangladesh)
+
 

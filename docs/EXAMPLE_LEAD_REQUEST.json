@@ -1,9 +1,10 @@
 {
-  "name": "Soykot Podder",
-  "email": "soiykot@gmail.com",
-  "phone": "+8801734537627",
+  "name": "John Doe",
+  "email": "john.doe@example.com",
+  "phone": "+1234567890",
   "company": "Example Corp",
   "source": "website",
   "notes": "Interested in product demo"
 }
+
 

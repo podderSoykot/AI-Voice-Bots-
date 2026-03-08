@@ -36,8 +36,8 @@ Once you have the Phone Number ID, include it in your API call:
 ```json
 {
   "lead_id": 1,
-  "phone_number": "+8801734537627",
-  "assistant_id": "9f0ecf8b-4676-4c02-afcd-ea7fddd1d1a2",
+  "phone_number": "+1234567890",
+  "assistant_id": "your-assistant-id-from-vapi",
   "phone_number_id": "your-phone-number-id-here"
 }
 ```
@@ -79,7 +79,7 @@ curl -X POST "http://127.0.0.1:8000/api/v1/calls/initiate" \
   -H "Content-Type: application/json" \
   -d '{
     "lead_id": 1,
-    "assistant_id": "9f0ecf8b-4676-4c02-afcd-ea7fddd1d1a2",
+    "assistant_id": "your-assistant-id-from-vapi",
     "phone_number_id": "your-phone-number-id"
   }'
 ```
@@ -89,4 +89,5 @@ curl -X POST "http://127.0.0.1:8000/api/v1/calls/initiate" \
 - [Vapi Phone Numbers Documentation](https://docs.vapi.ai)
 - [Vapi Dashboard](https://dashboard.vapi.ai)
 - Check the error message details - it will tell you exactly what's missing
+
 
